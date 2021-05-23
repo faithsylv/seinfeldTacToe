@@ -4,5 +4,85 @@ $primary-color: orangered;
 
 body {
   font: 100% $font-stack;
-  color: $primary-color;
+}
+
+.board {
+
+  width: 600px;
+
+  display: inline-grid;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(3, 200px);
+  grid-gap: 3px;
+
+  background-color: black;
+
+  margin: 0 auto;
+
+  .square {
+    background-color: white;
+    text-align: center;
+  }
+
+}
+
+/* class for the boards to each side of main table - symbol and scoreboard  */
+.board-style {
+  font-size: 25px;
+  display: inline-block;
+  width: 200px;
+  margin-left: 45px;
+  margin-right: 45px;
+  background-color: #f44336eb;
+  vertical-align: middle;
+  border: 3px solid turquoise;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  table {
+    margin: 0 auto;
+  }
+
+}
+
+
+/* set height of each cell in the tables for the boards to the left and right of the main table to make room for the size of the text / emojis put in by javascript */
+#scoreboard td {
+  height: 73px;
+}
+
+#show-player-symbols td {
+  height: 73px;
+}
+
+.token-button {
+    width: 100px;
+    height: 100px;
+}
+
+.jerry-image {
+  height: 85px;
+}
+
+.newman-image {
+  height: 85px;
+}
+
+#player1-symbol-display, #player2-symbol-display {
+  font-size: 50px;
+}
+
+.invisible {
+  display: none;
+}
+
+/* styling for the symbol that follows the cursor during game play */
+#cursor-symbol {
+  position: absolute;
+  left: 48%;
+  right: 52%;
+  top: 44%;
+  bottom: 56%;
+  font-size: 50px;
+  margin: 5px;
 }

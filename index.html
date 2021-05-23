@@ -6,12 +6,92 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Seinfeld vs. Newman</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery.js"></script>
   <script src="js/seinfeldtactoe.js" charset="utf-8"></script>
 </head>
 <body>
 
   <h1>WELCOME TO SEINFELD VS NEWMAN!!</h1>
-  <p>Game coming soon...</p>
+  <div id='cursor-symbol' class='invisible'></div>
+
+
+  <!-- div for a square with title and table showing which token / symbol players have chosen -->
+  <div id = 'player-symbol-board' class = 'board-style'>
+    <h2 class = 'board-title'>Tokens</h2>
+    <table id = 'show-player-symbols'>
+      <tr>
+        <td>Player 1:</td>
+        <td id ='player1-symbol-display' class = 'jsinput-display'></td>
+      </tr>
+      <tr>
+        <td>Player 2:</td>
+        <td id ='player2-symbol-display' class = 'jsinput-display'></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="board">
+
+    <div class="square square--1"></div>
+    <div class="square square--2"></div>
+    <div class="square square--3"></div>
+    <div class="square square--4"></div>
+    <div class="square square--5"></div>
+    <div class="square square--6"></div>
+    <div class="square square--7"></div>
+    <div class="square square--8"></div>
+    <div class="square square--9"></div>
+  </div>
+
+  <!-- div for a square with title and table showing the score for each player -->
+  <div id = 'scoreboard' class = 'board-style'>
+    <h2 class = 'board-title'>Scoreboard</h2>
+    <table>
+      <tr>
+        <td>Player 1:</td>
+        <td id = 'player1-score' class = 'jsinput-display'>0</td>
+      </tr>
+      <tr>
+        <td>Player 2:</td>
+        <td id = 'player2-score' class = 'jsinput-display'>0</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- position absolute banner allowing user to pick their symbol / token and providing instructions for game - shows only at start of game across center of page  -->
+  <div id='symbol-picker'>
+
+    <h3>Player 1, are you a Seinfeld....or a <em>Newman</em>?</h3>
+
+    <button class="token-button jerry-button">
+      <img src="images/Jerry.png" alt="Image of Jerry Seinfeld" class="jerry-image">
+    </button>
+    <button class="token-button newman-button">
+      <img src="images/Newman.png" alt="Image of Newman" class="newman-image">
+    </button>
+
+    <h4 id='instructions'>Player 2's symbol will default to the other option. <br>Don't worry, if you know how to play Tic Tac Toe, then you know how to play Seinfeld Tac Toe...</h4>
+
+    <!-- position absolute banner that appears if there is a winner - shows only at once a winner is called  -->
+    <div id="winner-banner" class="invisible">
+      <p><span class = 'name-winner'></span> won!</p>
+    </div>
+
+    <!-- position absolute banner that appears if there is a draw - shows only once the draw is discovered  -->
+    <div id="cats-game" class="invisible">
+      <p>Oh dear, it's a Cat's Game!</p>
+    </div>
+
+    <!-- position absolute div with button that appears at the end of a game (whether a winner or a draw) - shows only once game ends  -->
+    <div id='play-again' class='invisible'>
+      <button class = 'play-again cssload-loader'>Play Again!</button>
+    </div>
+
+    <!-- element to hold the current symbol which follows the cursor - symbol switches with each turn -->
+    <div id='cursor-symbol' class='invisible'></div>
+
+  </div>
+
 
 </body>
 </html>
