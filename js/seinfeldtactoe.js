@@ -5,13 +5,13 @@ $( document ).ready( function () {
     const player1 = {
       symbol: '',
       html: '',
-      score: NaN, undefined
+      score: 0
     }
 
     const player2 = {
       symbol: '',
       html: '',
-      score: NaN, undefined
+      score: 0
     }
 
     const currentPlayer = {
@@ -83,44 +83,47 @@ $( document ).ready( function () {
     const checkWinner = function () {
 
       //get the contents of each cell from the DOM for comparison
-      const cell1Text = $(' #1 ').text();
-      const cell2Text = $(' #2 ').text();
-      const cell3Text = $(' #3 ').text();
-      const cell4Text = $(' #4 ').text();
-      const cell5Text = $(' #5 ').text();
-      const cell6Text = $(' #6 ').text();
-      const cell7Text = $(' #7' ).text();
-      const cell8Text = $(' #8 ').text();
-      const cell9Text = $(' #9 ').text();
 
-      //if else statements to compare all potential 3-in-a-row combos for a winner
-      if (cell1Text === cell2Text && cell1Text === cell3Text && cell1Text !== ''){
+      const cell1 = $('.square--1').html();
+      const cell2 = $('.square--2').html();
+      const cell3 = $('.square--3').html();
+      const cell4 = $('.square--4').html();
+      const cell5 = $('.square--5').html();
+      const cell6 = $('.square--6').html();
+      const cell7 = $('.square--7').html();
+      const cell8 = $('.square--8').html();
+      const cell9 = $('.square--9').html();
+
+      console.log(cell1 === cell2 && cell1 === cell3 && cell1 !== '');
+
+      // if else statements to compare all potential 3-in-a-row combos for a winner
+      if (cell1 === cell2 && cell1 === cell3 && cell1 !== ''){
         ifWinnerCalls();
 
-      } else if (cell4Text === cell5Text && cell4Text === cell6Text && cell4Text !== ''){
+      } else if (cell4 === cell5 && cell4 === cell6 && cell4 !== ''){
         ifWinnerCalls();
 
-      } else if (cell7Text === cell8Text && cell7Text === cell9Text && cell7Text !== '') {
-
-        ifWinnerCalls();
-
-      } else if (cell1Text === cell4Text && cell1Text === cell7Text && cell1Text !== '') {
-
-        ifWinnerCalls();
-
-      } else if (cell2Text === cell5Text && cell2Text === cell8Text && cell2Text !== '') {
+      } else if (cell7 === cell8 && cell7 === cell9 && cell7 !== '') {
 
         ifWinnerCalls();
 
-      } else if (cell3Text === cell6Text && cell3Text === cell9Text && cell3Text !== '') {
+      } else if (cell1 === cell4 && cell1 === cell7 && cell1 !== '') {
 
         ifWinnerCalls();
 
-      } else if (cell1Text === cell5Text && cell1Text == cell9Text && cell1Text !== '') {
+      } else if (cell2 === cell5 && cell2 === cell8 && cell2 !== '') {
 
         ifWinnerCalls();
 
-      } else if (cell3Text === cell5Text && cell3Text === cell7Text && cell3Text !== ''){
+      } else if (cell3 === cell6 && cell3 === cell9 && cell3 !== '') {
+
+        ifWinnerCalls();
+
+      } else if (cell1 === cell5 && cell1 == cell9 && cell1 !== '') {
+
+        ifWinnerCalls();
+
+      } else if (cell3 === cell5 && cell3 === cell7 && cell3 !== ''){
 
         ifWinnerCalls();
 
@@ -132,7 +135,7 @@ $( document ).ready( function () {
 
       //loop through each cell - at each looop, boardHasRemainingSpaces is turned to true.Because variable starts as false, if it loops through and there are no empty spaces, boardHasRemainingSpaces will stay false once the loop finishes (NB the checkWinner function runs at every cell click)
       for ( let i = 1; i <= 9; i ++ ) {
-        if ( $( `#${ i }` ).text() === '') {
+        if ( $( `.square--${ i }` ).is(':empty')) {
           boardHasRemainingSpaces = true;
         }
       }
@@ -149,7 +152,68 @@ $( document ).ready( function () {
         $( '#cursor-symbol' ).addClass( 'invisible' );
       }
 
-}
+    }
+
+    const ifWinnerCalls = function () {
+
+      console.log('winner!');
+
+      // set gameOver variable to true to  stop ongoing play / clicking on the board once there is a winner
+      gameOver = true;
+
+      //remove the cursor symbol from view (until board is cleared)
+      $( '#cursor-symbol' ).addClass( 'invisible' );
+
+      //show the winner banner - wait some time to see result before showing
+      setTimeout( function () {$( '#winner-banner' ).addClass( 'banner-over' )} , 850);
+
+      //show the play again button - wait some time to see result before showing
+      setTimeout( function () {$( '#play-again' ).removeClass( 'invisible' )} , 850);
+
+      //see if the player's symbol matches the text in the currentPlayerSymbol variable at the time of winning - if they match, then that player won
+      if(player1.symbol === currentPlayer.symbol) {
+        console.log(currentPlayer.symbol);
+        $( '.name-winner' ).text( 'Player 1' ) //add text to the name winner span displayed on banner
+        $( '#player1-score' ).text( player1.score += 1 ); // display player's new score
+      } else if (player2.symbol === currentPlayer.symbol ) {
+        $( '.name-winner' ).text( 'Player 2' );
+        $( '#player2-score' ).text( player2.score += 1 );
+      }
+
+
+      //once the play again button is clicked, clear the board
+      $( '.play-again' ).on( 'click', clearBoard );
+
+    }
+
+
+    const clearBoard = function () {
+
+      console.log('clearing!');
+
+      // Loop to remove the text in each table cell
+      for( let i = 1; i <= 9; i ++ ) {
+        $( `.square--${ i }` ).empty();
+      }
+
+      //re-set the gameOver variable to false so that game play can start (NB on click event for each table cell in main playGame function can only run if gameOver is false)
+      gameOver = false;
+
+      //if it was a win event, remove the winner banner from view
+      $( '#winner-banner' ).removeClass( 'banner-over' ).addClass( 'invisible' );
+      // $( '#winner-banner' ).addClass( 'invisible' );
+
+      //if it was a draw, remove the cats game banner from view
+      $( '#cats-game' ).removeClass( 'cats-game-over' ).addClass( 'invisible' );
+      // $( '#cats-game' ).addClass( 'invisible' );
+
+      //remove the play again button from view because clicking it is what calls this clearBoard function so we don't need it until the game ends again (set in the ifWinnerCalls function)
+      $( '#play-again' ).addClass( 'invisible' );
+
+      //show the cursor symbol again so you can see who starts the next game
+      $( '#cursor-symbol' ).removeClass( 'invisible' );
+
+    }
 
 
     const playGame = function () {
@@ -172,7 +236,7 @@ $( document ).ready( function () {
           }
 
           //check if there is a winner as a result of that click
-          // checkWinner();
+          checkWinner();
 
           switchPlayer();
 

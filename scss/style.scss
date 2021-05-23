@@ -86,3 +86,68 @@ body {
   font-size: 50px;
   margin: 5px;
 }
+
+
+#play-again {
+  text-align: center;
+  margin: 0 auto;
+
+  button {
+    width: 245px;
+    height: 50px;
+    position: absolute;
+    text-align: center;
+    top: 71%;
+    right: 44%;
+    background-color: #ffeb3b;
+  }
+}
+
+/* code for play again button animation */
+.cssload-loader {
+	width: 244px;
+	height: 49px;
+	line-height: 49px;
+	text-align: center;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: helvetica, arial, sans-serif;
+	text-transform: uppercase;
+	font-weight: 900;
+	font-size:18px;
+	color: #f93276;
+	letter-spacing: 0.2em;
+}
+.cssload-loader::before, .cssload-loader::after {
+	content: "";
+	display: block;
+	width: 15px;
+	height: 15px;
+	background: #f93276;
+	position: absolute;
+	animation: cssload-load 0.81s infinite alternate ease-in-out;
+}
+.cssload-loader::before {
+	top: 0;
+}
+.cssload-loader::after {
+	bottom: 0;
+}
+
+@keyframes cssload-load {
+	0% {
+		left: 0;
+		height: 29px;
+		width: 15px;
+	}
+	50% {
+		height: 8px;
+		width: 39px;
+	}
+	100% {
+		left: 229px;
+		height: 29px;
+		width: 15px;
+	}
+}
